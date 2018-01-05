@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# This is a special script that is run after installing items from your .Brewfile
+# Use it to provide additional customizations.
+
+# source bash profile to get environment variables set
+if [ -z "$USER_PROFILE_LOADED"] && [ -f "$HOME/.bash_profile" ]; then
+  source "$HOME/.bash_profile"
+fi
+
+# tell the script to exit with failure if any command
+# returns a non-zero exit code
+set -e
+
+#---------------------------------------------------------------------
+# Projects.  The list of supported projects comes from
+# https://github.com/daptiv/dotfiles/tree/master/projects/
+# Each folder name is a project.  Just include the folder name as
+# outlined below, to include that project in your setup.
+#---------------------------------------------------------------------
+echo "Configuring projects"
+SETUP_SCRIPT="$HOME/.daptiv-dotfiles/projects/setup"
+if [ -f "$SETUP_SCRIPT" ]; then
+  # you can comment out any project you don't wish to include by putting a # at the beginning of the line
+  bash "$SETUP_SCRIPT" foxglove
+  bash "$SETUP_SCRIPT" ppm
+  bash "$SETUP_SCRIPT" ppmspa
+  bash "$SETUP_SCRIPT" ttm
+  bash "$SETUP_SCRIPT" pmdashboard
+  bash "$SETUP_SCRIPT" dtb
+  bash "$SETUP_SCRIPT" new-feature-popup
+  bash "$SETUP_SCRIPT" react-theme
+  #bash "$SETUP_SCRIPT" cognos
+  echo "Finished configuring projects"
+fi
+
+#---------------------------------------------------------------------
+# Personal setup
+# If you have another personal repository that has additional
+# configuration, such as license keys, you can call out to it here.
+#---------------------------------------------------------------------
+# personal="$HOME/src/personal-configuration/setup.sh"
+#[ -f "$personal" ] && bash "$personal"
