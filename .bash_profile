@@ -29,6 +29,4 @@ if [ $? -eq 0 ]; then \
         fi)$(gitPs1 " (%s)")'$Reset'"; \
 fi)'"\$ "
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
